@@ -31,10 +31,10 @@ public class Plaga {
 	public Plaga() {
 	}
 
-	public Plaga(String nombreVulgar, String nombreCientifico, String url, List<Sustancia> sustancias) {
+	public Plaga(String nombreVulgar, String nombreCientifico, List<Sustancia> sustancias) {
 		this.nombreVulgar = nombreVulgar;
 		this.nombreCientifico = nombreCientifico;
-		this.url = url;
+		this.url = "https://plagas/" + nombreVulgar;
 		this.sustancias = sustancias;
 	}
 

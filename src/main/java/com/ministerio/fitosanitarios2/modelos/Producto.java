@@ -19,9 +19,9 @@ public class Producto {
 	public Producto() {
 	}
 
-	public Producto(String nombre, String url) {
+	public Producto(String nombre) {
 		this.nombre = nombre;
-		this.url = url;
+		this.url = "https://productos/" + nombre;
 	}
 
 	public long getProducto_id() {

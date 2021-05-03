@@ -1,6 +1,5 @@
 package com.ministerio.fitosanitarios2.controladores;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +18,7 @@ public class EspecieControlador {
 	@Autowired
 	private EspecieRepositorio especieRepositorio;
 	
-	@GetMapping("/especies")
-	public ResponseEntity<List<Especie>> getEspecies() {
-		
-		List<Especie> especies = especieRepositorio.findAll();
-		
-		if (especies == null) 
-			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-		else 
-			return new ResponseEntity<>(especies, (especies.isEmpty())? HttpStatus.NO_CONTENT : HttpStatus.OK);
-	}	
-	
-	@GetMapping("/especie/info/{especie_id}")
+	@GetMapping("/especie/{especie_id}")
 	public ResponseEntity<Especie> getEspecie(@PathVariable Long especie_id) {
 		
 		Optional<Especie> especie = especieRepositorio.findById(especie_id);
@@ -40,6 +28,5 @@ public class EspecieControlador {
 		else 
 			return new ResponseEntity<>(especie.get(), HttpStatus.OK);
 	}
-	  
 
 }

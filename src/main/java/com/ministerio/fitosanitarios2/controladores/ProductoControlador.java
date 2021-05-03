@@ -1,6 +1,5 @@
 package com.ministerio.fitosanitarios2.controladores;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +17,8 @@ public class ProductoControlador {
 
 	@Autowired
 	private ProductoRepositorio productoRepositorio;
-	
-	@GetMapping("/productos")
-	public ResponseEntity<List<Producto>> getProductos() {
-		
-		List<Producto> productos = productoRepositorio.findAll();
-		
-		if (productos == null) 
-			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-		else 
-			return new ResponseEntity<>(productos, (productos.isEmpty())? HttpStatus.NO_CONTENT : HttpStatus.OK);
-	}
 	  
-	@GetMapping("/producto/info/{producto_id}")
+	@GetMapping("/producto/{producto_id}")
 	public ResponseEntity<Producto> getProducto(@PathVariable Long producto_id) {
 		
 		Optional<Producto> producto = productoRepositorio.findById(producto_id);
