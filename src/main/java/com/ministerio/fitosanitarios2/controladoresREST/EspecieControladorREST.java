@@ -1,4 +1,4 @@
-package com.ministerio.fitosanitarios2.controladores;
+package com.ministerio.fitosanitarios2.controladoresREST;
 
 import java.util.Optional;
 
@@ -13,7 +13,7 @@ import com.ministerio.fitosanitarios2.modelos.Especie;
 import com.ministerio.fitosanitarios2.repositorios.EspecieRepositorio;
 
 @RestController
-public class EspecieControlador {
+public class EspecieControladorREST {
 
 	@Autowired
 	private EspecieRepositorio especieRepositorio;

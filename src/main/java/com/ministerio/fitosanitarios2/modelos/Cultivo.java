@@ -14,45 +14,45 @@ import javax.persistence.JoinColumn;
 @Entity
 public class Cultivo {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long cultivo_id;
-	
-	private String nombre;
-	
-	@ManyToMany(cascade=CascadeType.ALL)  
-    @JoinTable(name="especie_cultivo", joinColumns=@JoinColumn(name="cultivo_id"), inverseJoinColumns=@JoinColumn(name="especie_id")) 
-	private List<Especie> especies;
-	
-	public Cultivo() {	
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long cultivo_id;
 
-	public Cultivo(String nombre, List<Especie> especies) {
-		this.nombre = nombre;
-		this.especies = especies;
-	}
+    private String nombre;
 
-	public long getCultivo_id() {
-		return cultivo_id;
-	}
+    @ManyToMany()
+    @JoinTable(name = "especie_cultivo", joinColumns = @JoinColumn(name = "cultivo_id"), inverseJoinColumns = @JoinColumn(name = "especie_id"))
+    private List<Especie> especies;
 
-	public void setCultivo_id(long cultivo_id) {
-		this.cultivo_id = cultivo_id;
-	}
+    public Cultivo() {
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public Cultivo(String nombre, List<Especie> especies) {
+        this.nombre = nombre;
+        this.especies = especies;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public long getCultivo_id() {
+        return cultivo_id;
+    }
 
-	public List<Especie> getEspecies() {
-		return especies;
-	}
+    public void setCultivo_id(long cultivo_id) {
+        this.cultivo_id = cultivo_id;
+    }
 
-	public void setEspecies(List<Especie> especies) {
-		this.especies = especies;
-	}
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public List<Especie> getEspecies() {
+        return especies;
+    }
+
+    public void setEspecies(List<Especie> especies) {
+        this.especies = especies;
+    }
 }

@@ -24,7 +24,7 @@ public class Plaga {
 	
 	private String url;
 	
-	@ManyToMany(cascade=CascadeType.ALL)  
+	@ManyToMany()
     @JoinTable(name="sustancia_plaga", joinColumns=@JoinColumn(name="plaga_id"), inverseJoinColumns=@JoinColumn(name="sustancia_id")) 
 	private List<Sustancia> sustancias;
 	

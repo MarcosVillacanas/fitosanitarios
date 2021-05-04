@@ -1,4 +1,4 @@
-package com.ministerio.fitosanitarios2.controladores;
+package com.ministerio.fitosanitarios2.controladoresREST;
 
 import java.util.Optional;
 
@@ -13,7 +13,7 @@ import com.ministerio.fitosanitarios2.modelos.Plaga;
 import com.ministerio.fitosanitarios2.repositorios.PlagaRepositorio;
 
 @RestController
-public class PlagaControlador {
+public class PlagaControladorREST {
 
 	@Autowired
 	private PlagaRepositorio plagaRepositorio;

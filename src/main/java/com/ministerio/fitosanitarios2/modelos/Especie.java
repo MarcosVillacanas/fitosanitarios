@@ -22,7 +22,7 @@ public class Especie {
 	
 	private String nombreCientifico;
 	
-	@ManyToMany(cascade=CascadeType.ALL)  
+	@ManyToMany()
     @JoinTable(name="plaga_especie", joinColumns=@JoinColumn(name="especie_id"), inverseJoinColumns=@JoinColumn(name="plaga_id")) 
 	private List<Plaga> plagas;
 

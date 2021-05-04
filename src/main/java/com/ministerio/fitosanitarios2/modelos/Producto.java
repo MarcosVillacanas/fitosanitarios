@@ -1,50 +1,48 @@
 package com.ministerio.fitosanitarios2.modelos;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Producto {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long producto_id;
 
-	private String nombre;
-	
-	private String url;
-	
-	public Producto() {
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long producto_id;
 
-	public Producto(String nombre) {
-		this.nombre = nombre;
-		this.url = "https://productos/" + nombre;
-	}
+    private String nombre;
 
-	public long getProducto_id() {
-		return producto_id;
-	}
+    private String url;
 
-	public void setProducto_id(long producto_id) {
-		this.producto_id = producto_id;
-	}
+    public Producto() {
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public Producto(String nombre) {
+        this.nombre = nombre;
+        this.url = "https://productos/" + nombre;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public long getProducto_id() {
+        return producto_id;
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    public void setProducto_id(long producto_id) {
+        this.producto_id = producto_id;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }
