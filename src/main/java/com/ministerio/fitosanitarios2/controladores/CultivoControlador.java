@@ -76,7 +76,25 @@ public class CultivoControlador {
 		
 		// 8 especies
 		
+		List<Especie> especies = generadorEspecies(new String[] {"Limon", "Manzana", "Granada", "Higo", "Nectarina", "Melocoton", "Fresa", "Cereza"});
 		
+		assert especies.size() >= 8;
+		
+		// RESTRICCIÓN 3
+		restriccionesPlagasEspecies(plagas, especies);
+		
+		especieRepositorio.saveAll(especies);
+		
+		// 4 categorías de cultivos
+		
+		List<Cultivo> cultivos = generadorCultivos(new String[] {"Primavera", "Verano", "Otono", "Invierno"});
+		
+		assert cultivos.size() >= 4;
+		
+		// RESTRICCIÓN 4
+		restriccionesEspeciesCultivos(especies, cultivos);
+		
+		cultivoRepositorio.saveAll(cultivos);
 	}
 	
 	@GetMapping("/cultivos")
@@ -170,5 +188,46 @@ public class CultivoControlador {
 		Sustancia fungicida = sustancias.get(4);
 		Plaga nematodo = plagas.get(12);					nematodo.getSustancias().add(fungicida);
 		Plaga roya = plagas.get(13);						roya.getSustancias().add(fungicida);
+	}
+
+	private List<Especie> generadorEspecies (String [] nombreEspecies) {
+		
+		return Arrays.stream(nombreEspecies).map(nombre -> new Especie(nombre, "Especea " + nombre + " Plantatus", new LinkedList<>())).collect(Collectors.toList());
+	}
+	
+	private void restriccionesPlagasEspecies (List<Plaga> plagas, List<Especie> especies) {
+		
+		// Al menos una plaga debera  afectar a 3 especies diferentes, y dos plagas a al menos dos especies diferentes.
+		
+		Plaga pulgon = plagas.get(0);
+		Especie limon = especies.get(0);					limon.getPlagas().add(pulgon);
+		Especie manzana = especies.get(1);					manzana.getPlagas().add(pulgon);
+		Especie granada = especies.get(2);					granada.getPlagas().add(pulgon);
+		
+		Plaga cochinilla = plagas.get(1);
+		Especie higo = especies.get(3);						higo.getPlagas().add(cochinilla);
+		Especie nectarina = especies.get(4);				nectarina.getPlagas().add(cochinilla);
+		
+		Plaga trip = plagas.get(2);
+		Especie melocoton = especies.get(5);				melocoton.getPlagas().add(trip);
+		Especie fresa = especies.get(6);					fresa.getPlagas().add(trip);
+	}
+	
+	private List<Cultivo> generadorCultivos (String [] nombreCultivos) {
+		
+		return Arrays.stream(nombreCultivos).map(nombre -> new Cultivo(nombre, new LinkedList<>())).collect(Collectors.toList());
+	}
+
+	private void restriccionesEspeciesCultivos (List<Especie> especies, List<Cultivo> cultivos) {
+		
+		//  Al menos una especie deberá pertenecer a dos o más categorías.
+		
+		Especie limon = especies.get(0);					
+		Cultivo primavera = cultivos.get(0);					primavera.getEspecies().add(limon);
+		Cultivo verano = cultivos.get(1);						verano.getEspecies().add(limon);
+		
+		Especie manzana = especies.get(1);
+		Cultivo otono = cultivos.get(2);						otono.getEspecies().add(manzana);
+		Cultivo invierno = cultivos.get(3);						invierno.getEspecies().add(manzana);
 	}
 }
