@@ -2,7 +2,6 @@ package com.ministerio.fitosanitarios2.modelos;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,17 +12,17 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class Especie {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long especie_id;
-	
+
 	private String nombreVulgar;
-	
+
 	private String nombreCientifico;
-	
+
 	@ManyToMany()
-    @JoinTable(name="plaga_especie", joinColumns=@JoinColumn(name="especie_id"), inverseJoinColumns=@JoinColumn(name="plaga_id")) 
+	@JoinTable(name = "plaga_especie", joinColumns = @JoinColumn(name = "especie_id"), inverseJoinColumns = @JoinColumn(name = "plaga_id"))
 	private List<Plaga> plagas;
 
 	public Especie() {

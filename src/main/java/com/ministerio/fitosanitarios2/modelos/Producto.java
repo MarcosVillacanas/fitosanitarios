@@ -1,7 +1,6 @@
 package com.ministerio.fitosanitarios2.modelos;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Producto {

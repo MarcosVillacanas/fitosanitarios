@@ -43,9 +43,10 @@ public class CultivoControladorREST {
 
         // 30 productos fitosanitarios.
 
-        List<Producto> productos = generadorProductos(new String[]{"Hidrogeno", "Helio", "Litio", "Berilio", "Boro", "Carbono", "Nitrogeno", "Oxigeno",
-                "Fluor", "Neon", "Sodio", "Magnesio", "Aluminio", "Silice", "Fosforo", "Azufre", "Cloro", "Argon", "Potasio", "Calcio", "Escandio",
-                "Titanio", "Vanadio", "Cromo", "Manganeso", "Hierro", "Cobalto", "Niquel", "Cobre", "Zinc"});
+        List<Producto> productos = generadorProductos(new String[] { "Hidrogeno", "Helio", "Litio", "Berilio", "Boro",
+                "Carbono", "Nitrogeno", "Oxigeno", "Fluor", "Neon", "Sodio", "Magnesio", "Aluminio", "Silice",
+                "Fosforo", "Azufre", "Cloro", "Argon", "Potasio", "Calcio", "Escandio", "Titanio", "Vanadio", "Cromo",
+                "Manganeso", "Hierro", "Cobalto", "Niquel", "Cobre", "Zinc" });
 
         assert productos.size() >= 30;
 
@@ -53,9 +54,10 @@ public class CultivoControladorREST {
 
         // 20 sustancias activas.
 
-        List<Sustancia> sustancias = generadorSustancias(new String[]{"Alguicida", "Antimicrobiano", "Desecante", "Defoliante", "Desinfectante",
-                "Fungicida", "Herbicida", "Insecticida", "Regulador", "Acaricida", "Naftalina", "Ovicida", "Feromona", "Repelente", "Rodenticida",
-                "Molusquicida", "Conservante", "Antimicotico", "Mataratas", "Taponador"});
+        List<Sustancia> sustancias = generadorSustancias(new String[] { "Alguicida", "Antimicrobiano", "Desecante",
+                "Defoliante", "Desinfectante", "Fungicida", "Herbicida", "Insecticida", "Regulador", "Acaricida",
+                "Naftalina", "Ovicida", "Feromona", "Repelente", "Rodenticida", "Molusquicida", "Conservante",
+                "Antimicotico", "Mataratas", "Taponador" });
 
         assert sustancias.size() >= 20;
 
@@ -64,10 +66,11 @@ public class CultivoControladorREST {
 
         sustanciaRepositorio.saveAll(sustancias);
 
-//		 16 plagas.
+        // 16 plagas.
 
-        List<Plaga> plagas = generadorPlagas(new String[]{"Pulgon", "Cochinilla", "Trip", "Oruga", "Mosca", "Escarabajo", "Saltamontes", "Gusano",
-                "Caracol", "Babosa", "Hormiga", "Topo", "Nematodo", "Roya", "Mildiu", "Oidio"});
+        List<Plaga> plagas = generadorPlagas(
+                new String[] { "Pulgon", "Cochinilla", "Trip", "Oruga", "Mosca", "Escarabajo", "Saltamontes", "Gusano",
+                        "Caracol", "Babosa", "Hormiga", "Topo", "Nematodo", "Roya", "Mildiu", "Oidio" });
 
         assert plagas.size() >= 16;
 
@@ -78,7 +81,8 @@ public class CultivoControladorREST {
 
         // 8 especies
 
-        List<Especie> especies = generadorEspecies(new String[]{"Limon", "Manzana", "Granada", "Higo", "Nectarina", "Melocoton", "Fresa", "Cereza"});
+        List<Especie> especies = generadorEspecies(
+                new String[] { "Limon", "Manzana", "Granada", "Higo", "Nectarina", "Melocoton", "Fresa", "Cereza" });
 
         assert especies.size() >= 8;
 
@@ -89,7 +93,7 @@ public class CultivoControladorREST {
 
         // 4 categorías de cultivos
 
-        List<Cultivo> cultivos = generadorCultivos(new String[]{"Primavera", "Verano", "Otono", "Invierno"});
+        List<Cultivo> cultivos = generadorCultivos(new String[] { "Primavera", "Verano", "Otono", "Invierno" });
 
         assert cultivos.size() >= 4;
 
@@ -128,12 +132,14 @@ public class CultivoControladorREST {
 
     private List<Sustancia> generadorSustancias(String[] nombreSustancias) {
 
-        return Arrays.stream(nombreSustancias).map(nombre -> new Sustancia(nombre, new LinkedList<>())).collect(Collectors.toList());
+        return Arrays.stream(nombreSustancias).map(nombre -> new Sustancia(nombre, new LinkedList<>()))
+                .collect(Collectors.toList());
     }
 
     private void restriccionesProductosSustancias(List<Producto> productos, List<Sustancia> sustancias) {
 
-        // Al menos 5 productos deberán contener al menos 2 sustancias activas diferentes.
+        // Al menos 5 productos deberán contener al menos 2 sustancias activas
+        // diferentes.
 
         Producto hidrogeno = productos.get(0);
         Sustancia alguicida = sustancias.get(0);
@@ -168,12 +174,15 @@ public class CultivoControladorREST {
 
     private List<Plaga> generadorPlagas(String[] nombrePlagas) {
 
-        return Arrays.stream(nombrePlagas).map(nombre -> new Plaga(nombre, "Plagea " + nombre + " Infectatis", new LinkedList<>())).collect(Collectors.toList());
+        return Arrays.stream(nombrePlagas)
+                .map(nombre -> new Plaga(nombre, "Plagea " + nombre + " Infectatis", new LinkedList<>()))
+                .collect(Collectors.toList());
     }
 
     private void restriccionesSustanciasPlagas(List<Sustancia> sustancias, List<Plaga> plagas) {
 
-        // Al menos dos sustancias deberán ser aplicables a 3 plagas diferentes, y 4 sustancias a al menos dos plagas diferentes.
+        // Al menos dos sustancias deberán ser aplicables a 3 plagas diferentes, y 4
+        // sustancias a al menos dos plagas diferentes.
 
         Sustancia alguicida = sustancias.get(0);
         Plaga pulgon = plagas.get(0);
@@ -218,12 +227,15 @@ public class CultivoControladorREST {
 
     private List<Especie> generadorEspecies(String[] nombreEspecies) {
 
-        return Arrays.stream(nombreEspecies).map(nombre -> new Especie(nombre, "Especea " + nombre + " Plantatus", new LinkedList<>())).collect(Collectors.toList());
+        return Arrays.stream(nombreEspecies)
+                .map(nombre -> new Especie(nombre, "Especea " + nombre + " Plantatus", new LinkedList<>()))
+                .collect(Collectors.toList());
     }
 
     private void restriccionesPlagasEspecies(List<Plaga> plagas, List<Especie> especies) {
 
-        // Al menos una plaga debera  afectar a 3 especies diferentes, y dos plagas a al menos dos especies diferentes.
+        // Al menos una plaga debera afectar a 3 especies diferentes, y dos plagas a al
+        // menos dos especies diferentes.
 
         Plaga pulgon = plagas.get(0);
         Especie limon = especies.get(0);
@@ -248,12 +260,13 @@ public class CultivoControladorREST {
 
     private List<Cultivo> generadorCultivos(String[] nombreCultivos) {
 
-        return Arrays.stream(nombreCultivos).map(nombre -> new Cultivo(nombre, new LinkedList<>())).collect(Collectors.toList());
+        return Arrays.stream(nombreCultivos).map(nombre -> new Cultivo(nombre, new LinkedList<>()))
+                .collect(Collectors.toList());
     }
 
     private void restriccionesEspeciesCultivos(List<Especie> especies, List<Cultivo> cultivos) {
 
-        //  Al menos una especie deberá pertenecer a dos o más categorías.
+        // Al menos una especie deberá pertenecer a dos o más categorías.
 
         Especie limon = especies.get(0);
         Cultivo primavera = cultivos.get(0);
