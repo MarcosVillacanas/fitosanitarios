@@ -1,11 +1,12 @@
 const API_URI = 'http://localhost:8080/api/'
-const arbol = $('#arbol');
+const arbol = $('.arbol');
+const generator = idGenerator();
 
 $(function () {
     cargarCultivos();
 });
 
-$('#arbol').on('click', '.despliegue', function () {
+$('.arbol').on('click', '.despliegue', function () {
     if ($(this).val() === '+') {    // Desplegar
         limpiarDOM($(this).closest('li'))
         desplegarLista($(this).closest('li'));
@@ -17,7 +18,13 @@ $('#arbol').on('click', '.despliegue', function () {
 function renderizarHijos(elemento, datos) {
     //TODO: que sólo lleguen los nombres
     datos.forEach(e => {
-        elemento.append(`<li>${e.nombre}<input type='button' value='+' class='despliegue'></li>`)
+
+        elemento.append(
+            `<li>
+                <input type='button' value='+' id=${generator.next().value} class='despliegue'>
+                <label for="c2" class="label-arbol">${e.nombre}</label>
+            </li>`
+        )
     })
 }
 
@@ -26,7 +33,7 @@ const cargarCultivos = () => {
 }
 
 function limpiarDOM(origen) {
-    $('#arbol li').each((i, l) => {
+    $('.arbol li').each((i, l) => {
         if (!$.contains(l, origen[0])) {
             contraerLista($(l))
         }
@@ -45,4 +52,12 @@ function desplegarLista(lista) {
 function contraerLista(lista) {
     lista.find('.despliegue').first().val('+');
     lista.children('ul').remove();
+}
+
+function* idGenerator() {
+    let nId = 1;
+    while (true) {
+        yield `c${nId}`;
+        nId++;
+    }
 }
