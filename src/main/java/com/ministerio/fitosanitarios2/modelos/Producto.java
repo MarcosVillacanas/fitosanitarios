@@ -2,15 +2,22 @@ package com.ministerio.fitosanitarios2.modelos;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ministerio.fitosanitarios2.Vistas;
+
 @Entity
 public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonView(Vistas.NivelSustanciasProductos.class)
     private long producto_id;
 
+    @JsonView(Vistas.NivelSustanciasProductos.class)
     private String nombre;
 
+    @JsonView(Vistas.NivelSustanciasProductos.class)
     private String url;
 
     public Producto() {
@@ -21,6 +28,7 @@ public class Producto {
         this.url = "https://productos/" + nombre;
     }
 
+    @JsonProperty("id")
     public long getProducto_id() {
         return producto_id;
     }

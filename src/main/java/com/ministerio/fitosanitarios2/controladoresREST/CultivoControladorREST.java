@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ministerio.fitosanitarios2.Vistas;
 import com.ministerio.fitosanitarios2.modelos.*;
 import com.ministerio.fitosanitarios2.repositorios.*;
 
@@ -48,7 +50,8 @@ public class CultivoControladorREST {
                 "Fosforo", "Azufre", "Cloro", "Argon", "Potasio", "Calcio", "Escandio", "Titanio", "Vanadio", "Cromo",
                 "Manganeso", "Hierro", "Cobalto", "Niquel", "Cobre", "Zinc" });
 
-        assert productos.size() >= 30;
+        if (productos.size() < 30) System.err.println("No hay suficientes productos");
+        	
 
         productoRepositorio.saveAll(productos);
 
@@ -59,7 +62,8 @@ public class CultivoControladorREST {
                 "Naftalina", "Ovicida", "Feromona", "Repelente", "Rodenticida", "Molusquicida", "Conservante",
                 "Antimicotico", "Mataratas", "Taponador" });
 
-        assert sustancias.size() >= 20;
+        if (sustancias.size() < 20)  System.err.println("No hay suficientes sustancias");
+        	
 
         // RESTRICCIÓN 1
         restriccionesProductosSustancias(productos, sustancias);
@@ -72,7 +76,8 @@ public class CultivoControladorREST {
                 new String[] { "Pulgon", "Cochinilla", "Trip", "Oruga", "Mosca", "Escarabajo", "Saltamontes", "Gusano",
                         "Caracol", "Babosa", "Hormiga", "Topo", "Nematodo", "Roya", "Mildiu", "Oidio" });
 
-        assert plagas.size() >= 16;
+        if (plagas.size() < 16) System.err.println("No hay suficientes plagas");
+        	
 
         // RESTRICCIÓN 2
         restriccionesSustanciasPlagas(sustancias, plagas);
@@ -84,7 +89,8 @@ public class CultivoControladorREST {
         List<Especie> especies = generadorEspecies(
                 new String[] { "Limon", "Manzana", "Granada", "Higo", "Nectarina", "Melocoton", "Fresa", "Cereza" });
 
-        assert especies.size() >= 8;
+        if (especies.size() < 8) System.err.println("No hay suficientes especies");
+       
 
         // RESTRICCIÓN 3
         restriccionesPlagasEspecies(plagas, especies);
@@ -95,7 +101,7 @@ public class CultivoControladorREST {
 
         List<Cultivo> cultivos = generadorCultivos(new String[] { "Primavera", "Verano", "Otono", "Invierno" });
 
-        assert cultivos.size() >= 4;
+        if (cultivos.size() < 4) System.err.println("No hay suficientes cultivos");
 
         // RESTRICCIÓN 4
         restriccionesEspeciesCultivos(especies, cultivos);
@@ -104,6 +110,7 @@ public class CultivoControladorREST {
     }
 
     @GetMapping("/cultivos")
+    @JsonView(Vistas.NivelCultivos.class)
     public ResponseEntity<List<Cultivo>> getCultivos() {
 
         List<Cultivo> cultivos = cultivoRepositorio.findAll();
@@ -114,8 +121,9 @@ public class CultivoControladorREST {
             return new ResponseEntity<>(cultivos, (cultivos.isEmpty()) ? HttpStatus.NO_CONTENT : HttpStatus.OK);
     }
 
-    @GetMapping("/cultivo/{cultivo_id}")
-    public ResponseEntity<Cultivo> getCultivo(@PathVariable Long cultivo_id) {
+    @GetMapping("/cultivo/{cultivo_id}/especies")
+    @JsonView(Vistas.NivelCultivosEspecies.class)
+    public ResponseEntity<Cultivo> getCultivoEspecies(@PathVariable Long cultivo_id) {
 
         Optional<Cultivo> cultivo = cultivoRepositorio.findById(cultivo_id);
 

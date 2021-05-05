@@ -8,6 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ministerio.fitosanitarios2.Vistas;
+
 import javax.persistence.JoinColumn;
 
 @Entity
@@ -15,12 +20,15 @@ public class Cultivo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonView(Vistas.NivelCultivos.class)
     private long cultivo_id;
 
+    @JsonView(Vistas.NivelCultivos.class)
     private String nombre;
 
     @ManyToMany()
     @JoinTable(name = "especie_cultivo", joinColumns = @JoinColumn(name = "cultivo_id"), inverseJoinColumns = @JoinColumn(name = "especie_id"))
+    @JsonView(Vistas.NivelCultivosEspecies.class)
     private List<Especie> especies;
 
     public Cultivo() {
@@ -31,6 +39,7 @@ public class Cultivo {
         this.especies = especies;
     }
 
+    @JsonProperty("id")
     public long getCultivo_id() {
         return cultivo_id;
     }

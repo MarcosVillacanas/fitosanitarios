@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ministerio.fitosanitarios2.Vistas;
 import com.ministerio.fitosanitarios2.modelos.Especie;
 import com.ministerio.fitosanitarios2.repositorios.EspecieRepositorio;
 
@@ -20,8 +22,9 @@ public class EspecieControladorREST {
 	@Autowired
 	private EspecieRepositorio especieRepositorio;
 	
-	@GetMapping("/especie/{especie_id}")
-	public ResponseEntity<Especie> getEspecie(@PathVariable Long especie_id) {
+	@GetMapping("/especie/{especie_id}/plagas")
+	@JsonView(Vistas.NivelEspeciesPlagas.class)
+	public ResponseEntity<Especie> getEspeciePlagas(@PathVariable Long especie_id) {
 		
 		Optional<Especie> especie = especieRepositorio.findById(especie_id);
 		

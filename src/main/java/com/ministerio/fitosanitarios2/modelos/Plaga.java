@@ -10,21 +10,30 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ministerio.fitosanitarios2.Vistas;
+
 @Entity
 public class Plaga {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonView(Vistas.NivelEspeciesPlagas.class)
 	private long plaga_id;
 
+	@JsonView(Vistas.NivelEspeciesPlagas.class)
 	private String nombreVulgar;
 
+	@JsonView(Vistas.NivelEspeciesPlagas.class)
 	private String nombreCientifico;
 
+	@JsonView(Vistas.NivelEspeciesPlagas.class)
 	private String url;
 
 	@ManyToMany()
 	@JoinTable(name = "sustancia_plaga", joinColumns = @JoinColumn(name = "plaga_id"), inverseJoinColumns = @JoinColumn(name = "sustancia_id"))
+	@JsonView(Vistas.NivelPlagasSustancias.class)
 	private List<Sustancia> sustancias;
 
 	public Plaga() {
@@ -37,6 +46,7 @@ public class Plaga {
 		this.sustancias = sustancias;
 	}
 
+	@JsonProperty("id")
 	public long getPlaga_id() {
 		return plaga_id;
 	}

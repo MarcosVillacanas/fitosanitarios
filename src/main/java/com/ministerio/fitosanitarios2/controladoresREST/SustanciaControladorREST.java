@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ministerio.fitosanitarios2.Vistas;
 import com.ministerio.fitosanitarios2.modelos.Sustancia;
 import com.ministerio.fitosanitarios2.repositorios.SustanciaRepositorio;
 
@@ -20,8 +22,9 @@ public class SustanciaControladorREST {
 	@Autowired
 	private SustanciaRepositorio sustanciaRepositorio;
 
-	@GetMapping("/sustancia/{sustancia_id}")
-	public ResponseEntity<Sustancia> getSustancia(@PathVariable Long sustancia_id) {
+	@GetMapping("/sustancia/{sustancia_id}/productos")
+	@JsonView(Vistas.NivelSustanciasProductos.class)
+	public ResponseEntity<Sustancia> getSustanciaProductos(@PathVariable Long sustancia_id) {
 		
 		Optional<Sustancia> sustancia = sustanciaRepositorio.findById(sustancia_id);
 		

@@ -10,17 +10,24 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ministerio.fitosanitarios2.Vistas;
+
 @Entity
 public class Sustancia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonView(Vistas.NivelPlagasSustancias.class)
     private long sustancia_id;
 
+    @JsonView(Vistas.NivelPlagasSustancias.class)
     private String nombre;
 
     @ManyToMany()
     @JoinTable(name = "producto_sustancia", joinColumns = @JoinColumn(name = "sustancia_id"), inverseJoinColumns = @JoinColumn(name = "producto_id"))
+    @JsonView(Vistas.NivelSustanciasProductos.class)
     private List<Producto> productos;
 
     public Sustancia() {
@@ -31,6 +38,7 @@ public class Sustancia {
         this.productos = productos;
     }
 
+    @JsonProperty("id")
     public long getSustancia_id() {
         return sustancia_id;
     }
