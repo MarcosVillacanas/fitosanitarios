@@ -9,7 +9,6 @@ $('#arbol').on('click', '.despliegue', function () {
     if ($(this).val() === '+') {    // Desplegar
         limpiarDOM($(this).closest('li'))
         desplegarLista($(this).closest('li'));
-
     } else {    //Contraer
         contraerLista($(this).closest('li'))
     }
@@ -20,7 +19,6 @@ function renderizarHijos(elemento, datos) {
     datos.forEach(e => {
         elemento.append(`<li>${e.nombre}<input type='button' value='+' class='despliegue'></li>`)
     })
-
 }
 
 const cargarCultivos = () => {
@@ -46,5 +44,5 @@ function desplegarLista(lista) {
 
 function contraerLista(lista) {
     lista.find('.despliegue').first().val('+');
-    lista.children('ul').remove()
+    lista.children('ul').remove();
 }

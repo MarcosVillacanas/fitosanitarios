@@ -1,0 +1,23 @@
+body {
+    background-color: #d0f1ce;
+    margin: 0;
+}
+
+header {
+    background-color: #77a774;
+    position: sticky !important;
+    top: 0;
+    z-index: 1;
+    padding: 12px 25px;
+}
+
+#logo {
+    cursor: pointer;
+    font-family: 'kg_happy', serif;
+    text-decoration: none;
+    font-size: 26px;
+}
+
+#logo:visited {
+    color: black;
+}
