@@ -1,6 +1,5 @@
 const API_URI = 'http://localhost:8080/api/'
 const arbol = $('.arbol');
-const generator = idGenerator();
 
 const mapa = new Map([["cultivo", "especies"], ["especie", "plagas"], ["plaga", "sustancias"], ["sustancia", "productos"]])
 
@@ -28,7 +27,7 @@ function renderizarHijos(elemento, datos, resource) {
                             <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
                         </svg>
                     </label>
-                    <label class="label-arbol">${renderizarHijo(e)}</label>
+                    ${renderizarHijo(e)}
                 </div>
             </li>`
         )
