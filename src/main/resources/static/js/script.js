@@ -2,6 +2,8 @@ const API_URI = 'http://localhost:8080/api/'
 const arbol = $('.arbol');
 const generator = idGenerator();
 
+const mapa = new Map([["cultivo", "especies"], ["especie", "plagas"], ["plaga", "sustancias"], ["sustancia", "productos"]])
+
 $(function () {
     cargarCultivos();
 });
@@ -16,23 +18,40 @@ $('.arbol').on('change', '.despliegue', function () {
 });
 
 function renderizarHijos(elemento, datos, resource) {
-    //TODO: que sólo lleguen los nombres
-    datos.forEach(e => {
-        const id = generator.next().value;
+	datos.forEach(e => {
         elemento.append(
-            `<li id=cult-${e.id} class="${resource}">
+            `<li id=${resource}-${e.id} class="${resource}">
                 <div class="d-flex">
                     <label class="checkbox bounce">
-                        <input type='checkbox' class='despliegue'>
+                        <input type='checkbox' class='despliegue' >
                         <svg viewBox="0 0 21 21">
                             <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
                         </svg>
                     </label>
-                    <label class="label-arbol">${e.nombre}</label>
+                    <label class="label-arbol">${renderizarHijo(e)}</label>
                 </div>
             </li>`
         )
     })
+}
+
+function renderizarHijo(hijo) {
+	let hijoString = '';
+	let iteratorIndex = 0;
+	for (const dato in hijo) {
+		if (dato !== 'id') {
+			if (iteratorIndex == 0)
+				hijoString += hijo[dato];
+			else if (iteratorIndex == 1)
+				hijoString += ' (' + dato + ': ' + hijo[dato];
+			else
+				hijoString += '; ' + dato + ': ' + hijo[dato];
+			iteratorIndex++;
+		}
+	}
+	if (iteratorIndex > 1)
+		hijoString += ')';
+	return `<label class="label-arbol">${hijoString}</label>`
 }
 
 const cargarCultivos = () => {
@@ -48,12 +67,11 @@ function limpiarDOM(origen) {
 }
 
 function desplegarLista(lista) {
-    const endpoint = lista.attr('id').split('-')[1];
-    console.log(endpoint);
-    $.getJSON(`${API_URI}cultivos`, (res) => {
+    $.getJSON(getResourceFromId(lista.attr('id')), (res) => {
         let nuevaLista = $(`<ul></ul>`);
         lista.append(nuevaLista);
-        renderizarHijos(nuevaLista, res, 'cultivo')
+		let hijos = mapa.get(lista.attr('id').split('-')[0]);
+        renderizarHijos(nuevaLista, res[hijos], hijos.substring(0, hijos.length - 1));
     });
 }
 
@@ -62,17 +80,7 @@ function contraerLista(lista) {
     lista.children('ul').remove();
 }
 
-function* idGenerator() {
-    let nId = 1;
-    while (true) {
-        yield `c${nId}`;
-        nId++;
-    }
-}
-
 function getResourceFromId(id) {
     let splitted = id.split('-');
-    // const endpoint = mapaRecursos.get(splitted[0]);
-    // return [endpoint, splitted[1]];
-    return `${API_URI}${splitted[0]}/${splitted[1]}`
+    return `${API_URI}${splitted[0]}/${splitted[1]}/${mapa.get(splitted[0])}`
 }
