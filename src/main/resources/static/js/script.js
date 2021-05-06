@@ -15,15 +15,15 @@ $('.arbol').on('change', '.despliegue', function () {
     }
 });
 
-function renderizarHijos(elemento, datos) {
+function renderizarHijos(elemento, datos, resource) {
     //TODO: que sólo lleguen los nombres
     datos.forEach(e => {
         const id = generator.next().value;
         elemento.append(
-            `<li>
+            `<li id=cult-${e.id} class="${resource}">
                 <div class="d-flex">
                     <label class="checkbox bounce">
-                        <input type='checkbox' id=${id} class='despliegue'>
+                        <input type='checkbox' class='despliegue'>
                         <svg viewBox="0 0 21 21">
                             <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
                         </svg>
@@ -36,7 +36,7 @@ function renderizarHijos(elemento, datos) {
 }
 
 const cargarCultivos = () => {
-    $.getJSON(`${API_URI}cultivos`, (res) => renderizarHijos(arbol, res));
+    $.getJSON(`${API_URI}cultivos`, (res) => renderizarHijos(arbol, res, 'cultivo'));
 }
 
 function limpiarDOM(origen) {
@@ -48,11 +48,12 @@ function limpiarDOM(origen) {
 }
 
 function desplegarLista(lista) {
-    // lista.find('.despliegue').first().val('-');
+    const endpoint = lista.attr('id').split('-')[1];
+    console.log(endpoint);
     $.getJSON(`${API_URI}cultivos`, (res) => {
         let nuevaLista = $(`<ul></ul>`);
         lista.append(nuevaLista);
-        renderizarHijos(nuevaLista, res)
+        renderizarHijos(nuevaLista, res, 'cultivo')
     });
 }
 
@@ -67,4 +68,11 @@ function* idGenerator() {
         yield `c${nId}`;
         nId++;
     }
+}
+
+function getResourceFromId(id) {
+    let splitted = id.split('-');
+    // const endpoint = mapaRecursos.get(splitted[0]);
+    // return [endpoint, splitted[1]];
+    return `${API_URI}${splitted[0]}/${splitted[1]}`
 }

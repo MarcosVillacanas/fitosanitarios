@@ -2,3 +2,17 @@
     font-family: 'kg_happy';
     src: url('../fonts/kg_happy/KGHAPPY.ttf');
 }
+
+@font-face {
+    font-family: 'caviar-dreams';
+    src: url('../fonts/caviar-dreams/CaviarDreams.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'caviar-dreams';
+    src: url('../fonts/caviar-dreams/CaviarDreams_Bold.ttf');
+    font-weight: bold;
+    font-style: normal;
+}

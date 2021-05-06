@@ -31,3 +31,16 @@ header {
     font-size: 26px;
     color: black;
 }
+
+section {
+    margin: 20px;
+}
+
+section>h1 {
+    padding-bottom: 8px;
+    font-weight: bold;
+}
+
+h1, li {
+    font-family: caviar-dreams, serif;
+}
