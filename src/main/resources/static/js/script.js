@@ -6,8 +6,8 @@ $(function () {
     cargarCultivos();
 });
 
-$('.arbol').on('click', '.despliegue', function () {
-    if ($(this).val() === '+') {    // Desplegar
+$('.arbol').on('change', '.despliegue', function () {
+    if (this.checked) {    // Desplegar
         limpiarDOM($(this).closest('li'))
         desplegarLista($(this).closest('li'));
     } else {    //Contraer
@@ -18,11 +18,18 @@ $('.arbol').on('click', '.despliegue', function () {
 function renderizarHijos(elemento, datos) {
     //TODO: que sólo lleguen los nombres
     datos.forEach(e => {
-
+        const id = generator.next().value;
         elemento.append(
             `<li>
-                <input type='button' value='+' id=${generator.next().value} class='despliegue'>
-                <label for="c2" class="label-arbol">${e.nombre}</label>
+                <div class="d-flex">
+                    <label class="checkbox bounce">
+                        <input type='checkbox' id=${id} class='despliegue'>
+                        <svg viewBox="0 0 21 21">
+                            <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+                        </svg>
+                    </label>
+                    <label class="label-arbol">${e.nombre}</label>
+                </div>
             </li>`
         )
     })
@@ -34,14 +41,14 @@ const cargarCultivos = () => {
 
 function limpiarDOM(origen) {
     $('.arbol li').each((i, l) => {
-        if (!$.contains(l, origen[0])) {
+        if (!(l.isEqualNode(origen[0]) || $.contains(l, origen[0]))) {
             contraerLista($(l))
         }
     });
 }
 
 function desplegarLista(lista) {
-    lista.find('.despliegue').first().val('-');
+    // lista.find('.despliegue').first().val('-');
     $.getJSON(`${API_URI}cultivos`, (res) => {
         let nuevaLista = $(`<ul></ul>`);
         lista.append(nuevaLista);
@@ -50,7 +57,7 @@ function desplegarLista(lista) {
 }
 
 function contraerLista(lista) {
-    lista.find('.despliegue').first().val('+');
+    lista.find('.despliegue').prop("checked", false);
     lista.children('ul').remove();
 }
 
