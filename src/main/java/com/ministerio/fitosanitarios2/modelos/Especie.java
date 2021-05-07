@@ -23,7 +23,7 @@ public class Especie {
 	private long especie_id;
 
 	@JsonView(Vistas.NivelCultivosEspecies.class)
-	private String nombreVulgar;
+	private String nombre;
 
 	@JsonView(Vistas.NivelCultivosEspecies.class)
 	private String nombreCientifico;
@@ -36,8 +36,8 @@ public class Especie {
 	public Especie() {
 	}
 
-	public Especie(String nombreVulgar, String nombreCientifico, List<Plaga> plagas) {
-		this.nombreVulgar = nombreVulgar;
+	public Especie(String nombre, String nombreCientifico, List<Plaga> plagas) {
+		this.nombre = nombre;
 		this.nombreCientifico = nombreCientifico;
 		this.plagas = plagas;
 	}
@@ -51,12 +51,12 @@ public class Especie {
 		this.especie_id = especie_id;
 	}
 
-	public String getNombreVulgar() {
-		return nombreVulgar;
+	public String getnombre() {
+		return nombre;
 	}
 
-	public void setNombreVulgar(String nombreVulgar) {
-		this.nombreVulgar = nombreVulgar;
+	public void setnombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public String getNombreCientifico() {

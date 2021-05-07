@@ -23,7 +23,7 @@ public class Plaga {
 	private long plaga_id;
 
 	@JsonView(Vistas.NivelEspeciesPlagas.class)
-	private String nombreVulgar;
+	private String nombre;
 
 	@JsonView(Vistas.NivelEspeciesPlagas.class)
 	private String nombreCientifico;
@@ -39,10 +39,10 @@ public class Plaga {
 	public Plaga() {
 	}
 
-	public Plaga(String nombreVulgar, String nombreCientifico, List<Sustancia> sustancias) {
-		this.nombreVulgar = nombreVulgar;
+	public Plaga(String nombre, String nombreCientifico, List<Sustancia> sustancias) {
+		this.nombre = nombre;
 		this.nombreCientifico = nombreCientifico;
-		this.url = "https://plagas/" + nombreVulgar;
+		this.url = "https://plagas/" + nombre;
 		this.sustancias = sustancias;
 	}
 
@@ -55,12 +55,12 @@ public class Plaga {
 		this.plaga_id = plaga_id;
 	}
 
-	public String getNombreVulgar() {
-		return nombreVulgar;
+	public String getnombre() {
+		return nombre;
 	}
 
-	public void setNombreVulgar(String nombreVulgar) {
-		this.nombreVulgar = nombreVulgar;
+	public void setnombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public String getNombreCientifico() {

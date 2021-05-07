@@ -156,3 +156,7 @@
 .producto .checkbox {
   display: none;
 }
+
+.easyTooltip {
+  display: none;
+}

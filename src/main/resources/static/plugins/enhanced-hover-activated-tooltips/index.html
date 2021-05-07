@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>jQuery Easy Tooltip Demos</title>
+	<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="easyTooltip.min.js"></script>
+	<style>
+		body { font-family: 'Open Sans'; background-color: #fafafa; }
+		#main {
+			max-width: 960px;
+			margin: 150px auto;
+		}
+
+		h2 {
+			margin-top: 60px;
+		}
+
+		h3 {
+			margin-top: 40px;
+		}
+
+		.item {
+			width: 150px;
+			height: 50px;
+			line-height: 50px;
+			background: #9B59B6;
+			text-align: center;
+			color: #fff;
+		}
+	</style>
+</head>
+
+<body><div id="jquery-script-menu">
+<div class="jquery-script-center">
+<ul>
+<li><a href="https://www.jqueryscript.net/time-clock/hijri-date-picker-bootstrap.html">Download This Plugin</a></li>
+<li><a href="https://www.jqueryscript.net/">Back To jQueryScript.Net</a></li>
+</ul><div id="carbon-block"></div>
+<div class="jquery-script-ads"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<div class="jquery-script-clear"></div>
+</div>
+</div>
+	<div id="main">
+		<h1>jQuery Easy Tooltip Demos</h1>
+		<div id="existedContentId">Check Out Demo 5</div>
+		<h2>Follow Mouse</h2>
+		<h3>1. Top Tooltip</h3>
+		<div id="test1" class="item">Hover Me!</div>
+		<h3>2. Right Tooltip</h3>
+		<div id="test2" class="item">Hover Me!</div>
+		<h3>3. Bottom Tooltip</h3>
+		<div id="test3" class="item">Hover Me!</div>
+		<h3>4. Left Tooltip</h3>
+		<div id="test4" class="item">Hover Me!</div>
+		<h3>5. Load Content From Any HTML</h3>
+		<div id="test5" class="item">Hover Me!</div>
+		<h3>6. Dismiss On Remove</h3>
+		<div id="test6" class="item">Hover Me!</div>
+		<h3>7. With xOffset/yOffset props</h3>
+		<div id="test7" class="item">Hover Me!</div>
+		<h3>8. Custom Styles</h3>
+		<div id="test8" class="item">Hover Me!</div>
+		<h2>Fixed Tooltips</h2>
+		<h3>9. Top Tooltip</h3>
+		<div id="test9" class="item">Hover Me!</div>
+		<h3>10. Right Tooltip</h3>
+		<div id="test10" class="item">Hover Me!</div>
+		<h3>11. Bottom Tooltip</h3>
+		<div id="test11" class="item">Hover Me!</div>
+		<h3>12. Left Tooltip</h3>
+		<div id="test12" class="item">Hover Me!</div>
+		<h3>13. Custom Arrow</h3>
+		<div id="test13" class="item">Hover Me!</div>
+	</div>
+	<script type="text/javascript">
+		$("#test1").easyTooltip({
+			content: "<span style='color:#fe8e14;'>I am </span><span style='color:red;'>a sample.</span>"
+		});
+
+		$("#test2").easyTooltip({
+			tooltipDir: "right",
+			content: "I am a sample.",
+			tooltipPosition: '',
+			tooltipBgColor: "rgba(0,0,0,0.9)",
+  tooltipFtColor: "#fff",
+		});
+
+		$("#test3").easyTooltip({
+			tooltipDir: "bottom",
+			content: "I am a sample.",
+			tooltipPosition: 'absolute'
+		});
+
+		$("#test4").easyTooltip({
+			tooltipDir: "left",
+			content: "I am a sample."
+		});
+
+		$("#test5").easyTooltip({
+			content: "Test Content.",
+			existedContentId: "existedContentId"
+		});
+
+		$("#test6").easyTooltip({
+			content: "I am a sample.",
+			clickRemove: true
+		});
+
+		$("#test7").easyTooltip({
+			xOffset: 100,
+			yOffset: 100,
+			tooltipDir: "right",
+			content: "I am a sample."
+		});
+
+		$("#test8").easyTooltip({
+			content: "I am a sample.",
+			defaultRadius: "10px",
+			tooltipZindex: 10000,
+			tooltipPadding: "20px 30px",
+			tooltipBgColor: "rgba(0,0,0,0.7)",
+			tooltipFtSize: "18px",
+			tooltipLineHeight: "27px",
+			tooltipFtColor: "#fe8e14",
+			tooltipOpacity: 1,
+			tooltipArwBorderWidth: 10
+		});
+
+		$("#test9").easyTooltip({
+			tooltipPosition: 'relative',
+			content: "I am a sample."
+		});
+
+		$("#test10").easyTooltip({
+			tooltipPosition: 'relative',
+			tooltipDir: "right",
+			content: "I am a sample."
+		});
+
+		$("#test11").easyTooltip({
+			tooltipPosition: 'relative',
+			tooltipDir: "bottom",
+			content: "I am a sample."
+		});
+
+		$("#test12").easyTooltip({
+			tooltipPosition: 'relative',
+			tooltipDir: "left",
+			content: "I am a sample."
+		});
+
+		$("#test13").easyTooltip({
+			tooltipPosition: 'relative',
+			content: "I am a sample.",
+			tooltipArwBorderWidth: 12,
+			tooltipBgColor: "rgba(0,0,0,1)",
+  tooltipFtColor: "#fff",
+		});
+	</script>
+</body>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<script>
+try {
+  fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
+    return true;
+  }).catch(function(e) {
+    var carbonScript = document.createElement("script");
+    carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
+    carbonScript.id = "_carbonads_js";
+    document.getElementById("carbon-block").appendChild(carbonScript);
+  });
+} catch (error) {
+  console.log(error);
+}
+</script>
+</html>
