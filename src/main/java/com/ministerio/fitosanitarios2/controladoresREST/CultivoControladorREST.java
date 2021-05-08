@@ -4,11 +4,13 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,10 +47,10 @@ public class CultivoControladorREST {
 
         // 30 productos fitosanitarios.
 
-        List<Producto> productos = generadorProductos(new String[] { "Hidrogeno", "Helio", "Litio", "Berilio", "Boro",
-                "Carbono", "Nitrogeno", "Oxigeno", "Fluor", "Neon", "Sodio", "Magnesio", "Aluminio", "Silice",
-                "Fosforo", "Azufre", "Cloro", "Argon", "Potasio", "Calcio", "Escandio", "Titanio", "Vanadio", "Cromo",
-                "Manganeso", "Hierro", "Cobalto", "Niquel", "Cobre", "Zinc" });
+        List<Producto> productos = generadorProductos(new String[] { "Hidrógeno", "Helio", "Litio", "Berilio", "Boro",
+                "Carbono", "Nitrógeno", "Oxígeno", "Flúor", "Neón", "Sodio", "Magnesio", "Aluminio", "Sílice",
+                "Fósforo", "Azufre", "Cloro", "Argón", "Potasio", "Calcio", "Escandio", "Titanio", "Vanadio", "Cromo",
+                "Manganeso", "Hierro", "Cobalto", "Níquel", "Cobre", "Zinc" });
 
         if (productos.size() < 30) System.err.println("No hay suficientes productos");
         	
@@ -73,7 +75,7 @@ public class CultivoControladorREST {
         // 16 plagas.
 
         List<Plaga> plagas = generadorPlagas(
-                new String[] { "Pulgon", "Cochinilla", "Trip", "Oruga", "Mosca", "Escarabajo", "Saltamontes", "Gusano",
+                new String[] { "Pulgón", "Cochinilla", "Trip", "Oruga", "Mosca", "Escarabajo", "Saltamontes", "Gusano",
                         "Caracol", "Babosa", "Hormiga", "Topo", "Nematodo", "Roya", "Mildiu", "Oidio" });
 
         if (plagas.size() < 16) System.err.println("No hay suficientes plagas");
@@ -87,7 +89,7 @@ public class CultivoControladorREST {
         // 8 especies
 
         List<Especie> especies = generadorEspecies(
-                new String[] { "Limon", "Manzana", "Granada", "Higo", "Nectarina", "Melocoton", "Fresa", "Cereza" });
+                new String[] { "Limón", "Manzana", "Granada", "Higo", "Nectarina", "Melocotón", "Fresa", "Cereza" });
 
         if (especies.size() < 8) System.err.println("No hay suficientes especies");
        
@@ -99,7 +101,7 @@ public class CultivoControladorREST {
 
         // 4 categorías de cultivos
 
-        List<Cultivo> cultivos = generadorCultivos(new String[] { "Primavera", "Verano", "Otono", "Invierno" });
+        List<Cultivo> cultivos = generadorCultivos(new String[] { "Primavera", "Verano", "Otoño", "Invierno" });
 
         if (cultivos.size() < 4) System.err.println("No hay suficientes cultivos");
 
@@ -107,9 +109,62 @@ public class CultivoControladorREST {
         restriccionesEspeciesCultivos(especies, cultivos);
 
         cultivoRepositorio.saveAll(cultivos);
+        
+        aumentarRelaciones(cultivos, especies, plagas, sustancias, productos);
     }
 
-    @GetMapping("/cultivos")
+    private void aumentarRelaciones(List<Cultivo> cultivos, List<Especie> especies, List<Plaga> plagas,
+			List<Sustancia> sustancias, List<Producto> productos) {
+		
+    	Random random = new Random(11);
+    	
+    	int i = random.nextInt(productos.size());
+    	for (int j = 0; j < sustancias.size(); j++) {
+    		Sustancia sustancia = sustancias.get(j);
+    		for (int k = 0; k < random.nextInt(4) + 2; k++) {
+    			while (sustancia.getProductos().contains(productos.get(i)))
+    				i = random.nextInt(productos.size());
+    			sustancia.getProductos().add(productos.get(i));
+    		}
+    		sustanciaRepositorio.save(sustancia);
+    	}
+    	
+    	i = random.nextInt(sustancias.size());
+    	for (int j = 0; j < plagas.size(); j++) {
+    		Plaga plaga = plagas.get(j);
+    		for (int k = 0; k < random.nextInt(3) + 2; k++) {
+    			while (plaga.getSustancias().contains(sustancias.get(i)))
+    				i = random.nextInt(sustancias.size());
+    			plaga.getSustancias().add(sustancias.get(i));
+    		}
+    		plagaRepositorio.save(plaga);
+    	}
+    	
+    	i = random.nextInt(plagas.size());
+    	for (int j = 0; j < especies.size(); j++) {
+    		Especie	especie = especies.get(j);
+    		for (int k = 0; k < random.nextInt(2) + 2; k++) {
+    			while (especie.getPlagas().contains(plagas.get(i)))
+    				i = random.nextInt(plagas.size());
+    			especie.getPlagas().add(plagas.get(i));
+    		}
+    		especieRepositorio.save(especie);
+    	}
+    	
+    	i = random.nextInt(especies.size());
+    	for (int j = 0; j < cultivos.size(); j++) {
+    		Cultivo	cultivo = cultivos.get(j);
+    		for (int k = 0; k < random.nextInt(especies.size() - 2) + 2; k++) {
+    			while (cultivo.getEspecies().contains(especies.get(i)))
+    				i = random.nextInt(especies.size());
+    			cultivo.getEspecies().add(especies.get(i));
+    		}
+    		cultivoRepositorio.save(cultivo);
+    	}
+	}
+    
+
+	@GetMapping("/cultivos")
     @JsonView(Vistas.NivelCultivos.class)
     public ResponseEntity<List<Cultivo>> getCultivos() {
 
@@ -146,8 +201,7 @@ public class CultivoControladorREST {
 
     private void restriccionesProductosSustancias(List<Producto> productos, List<Sustancia> sustancias) {
 
-        // Al menos 5 productos deberán contener al menos 2 sustancias activas
-        // diferentes.
+        // Al menos 5 productos deberán contener al menos 2 sustancias activas diferentes.
 
         Producto hidrogeno = productos.get(0);
         Sustancia alguicida = sustancias.get(0);

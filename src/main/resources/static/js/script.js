@@ -68,7 +68,7 @@ const cargarCultivos = () => {
 }
 
 function limpiarDOM(origen) {
-    $('.arbol li').each((i, l) => {
+    $('.arbol li').each((_, l) => {
         if (!(l.isEqualNode(origen[0]) || $.contains(l, origen[0]))) {
             contraerLista($(l))
         }
