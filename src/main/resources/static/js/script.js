@@ -37,7 +37,8 @@ function crearElementoArbol(elemento, recurso) {
                     </svg>
                 </label>
                 <label class="label-arbol" ${elemento.nombreCientifico ? "data-tooltip='"
-            + elemento.nombreCientifico + "'" : ''}>${elemento.nombre}</label>
+            + elemento.nombreCientifico + "'" : ''}>${elemento.url ? "<a href='" +
+                elemento.url + "'>" + elemento.nombre + "</a>" : elemento.nombre}</label>
             </div>
         </li>`;
     return newElemento;

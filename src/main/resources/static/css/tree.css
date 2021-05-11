@@ -1,3 +1,7 @@
+.arbol{
+  font-size: 1.5rem;
+}
+
 #arbol-seccion,
 #arbol-seccion ul,
 #arbol-seccion li {
@@ -159,4 +163,8 @@
 
 .easyTooltip {
   display: none;
+}
+
+.label-arbol a {
+  color: green;
 }
