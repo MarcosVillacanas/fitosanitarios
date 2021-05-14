@@ -25,7 +25,7 @@ public class Producto {
 
     public Producto(String nombre) {
         this.nombre = nombre;
-        this.url = "https://productos/" + nombre;
+        this.url = "https://es.wikipedia.org/wiki/Especial:Aleatoria";
     }
 
     @JsonProperty("id")

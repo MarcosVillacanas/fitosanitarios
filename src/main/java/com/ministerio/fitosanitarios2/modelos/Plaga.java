@@ -42,7 +42,7 @@ public class Plaga {
 	public Plaga(String nombre, String nombreCientifico, List<Sustancia> sustancias) {
 		this.nombre = nombre;
 		this.nombreCientifico = nombreCientifico;
-		this.url = "https://plagas/" + nombre;
+		this.url = "https://es.wikipedia.org/wiki/Especial:Aleatoria";
 		this.sustancias = sustancias;
 	}
 
