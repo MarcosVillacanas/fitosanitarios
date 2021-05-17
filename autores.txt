@@ -1,0 +1,9 @@
+Álvaro Justo Rivas Alcobendas
+DNI: 53720556P
+
+Marcos Villacañas Flores
+DNI: 48158284X
+
+Ambos hemos trabajado con métodos de controladores del servidor y con partes del código Javascript. La mayoría de trabajo del cliente la ha efectuado Álvaro y la mayoría del servidor la ha llevado a cabo Marcos. 
+
+En concreto, Marcos ha trabajado en las funciones de renderizarHijos y crearElementoArbol de cliente, métodos que realizan peticiones al servidor de forma directa o como parte de métodos mayores responsables; y que modifican el DOM. Álvaro por su parte, ha trabajado sobre los controladores REST de espacie y plaga.
