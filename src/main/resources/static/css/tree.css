@@ -1,10 +1,13 @@
-.arbol{
+/**
+ * Este documento recoge los estilos que afectan al árbol de desplegables.
+ * Esto incluye el propio arbol, a los checkboxes desplegables, a los enlaces, etc.
+ */
+
+.arbol {
   font-size: 1.5rem;
 }
 
-#arbol-seccion,
-#arbol-seccion ul,
-#arbol-seccion li {
+#arbol-seccion, #arbol-seccion ul, #arbol-seccion li {
   position: relative;
 }
 
@@ -20,8 +23,7 @@
   margin-left: 5px;
 }
 
-#arbol-seccion li::before,
-#arbol-seccion li::after {
+#arbol-seccion li::before, #arbol-seccion li::after {
   content: "";
   position: absolute;
   left: -12px;
@@ -41,7 +43,7 @@
   top: 2px;
 }
 
-#arbol-seccion ul > li:last-child::after {
+#arbol-seccion ul>li:last-child::after {
   height: 8px;
 }
 
@@ -54,8 +56,7 @@
   position: relative;
 }
 
-.checkbox input,
-.checkbox svg {
+.checkbox input, .checkbox svg {
   width: 21px;
   height: 21px;
   display: block;
@@ -105,7 +106,7 @@
   transition-delay: 0.4s;
 }
 
-.checkbox.path input:checked + svg {
+.checkbox.path input:checked+svg {
   --a: 16.1 86.12;
   --o: 102.22;
 }
@@ -124,7 +125,7 @@
   --s: 11px;
 }
 
-.checkbox.bounce input:checked + svg {
+.checkbox.bounce input:checked+svg {
   -webkit-animation: bounce 0.4s linear forwards 0.2s;
   animation: bounce 0.4s linear forwards 0.2s;
 }
