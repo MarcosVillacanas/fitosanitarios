@@ -48,6 +48,7 @@
 }
 
 .checkbox {
+  /* Variables que usaremos para simplificar los estilos relativos a los checkboxes */
   --background: #fff;
   --border: #d1d6ee;
   --border-hover: #bbc1e1;
