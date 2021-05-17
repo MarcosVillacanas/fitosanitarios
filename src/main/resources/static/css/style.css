@@ -31,6 +31,11 @@ header {
     grid-area: header;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+#header-pic {
+    height: 100%;
 }
 
 header~*:not(footer) {
